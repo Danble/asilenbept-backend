@@ -1,16 +1,16 @@
-const mysql = require('mysql')
+const express = require('express')
+const bodyParser = require('body-parser')
+const db = require('./models')
 
-const server = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'toor',
-  database: 'Test'
+const app = express()
+
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended: true}))
+
+const PORT = process.env.PORT || 8080
+require('./routes/user.routes')(app)
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`)
 })
 
-server.connect(err => {
-  if (err) throw err;
-  server.query(`INSERT INTO users (id, users) VALUES (?, ?)`, [2, 'probando2'], (err, result, fields) => {
-    if (err) throw err;
-    console.log(result);
- })
-})
+db.sequelize.sync()
