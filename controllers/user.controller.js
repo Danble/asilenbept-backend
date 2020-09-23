@@ -3,17 +3,21 @@ const User = db.users
 const Op = db.Sequelize.Op
 
 exports.create = (req, res) => {
-  if (!req.body.first_name) {
+  if (!req.body.name || !req.body.nickname || !req.body.email || !req.body.password || !req.body.user_type) {
     res.status(400).send({
-      message: "Content cannot be empty!"
+      message: "Mandatory fields can't be empty!"
     })
     return
   }
 
   const user = {
-    first_name: req.body.first_name,
-    last_name: req.body.last_name,
-    email: req.body.email
+    name: req.body.name,
+    nickname: req.body.nickname,
+    email: req.body.email,
+    password: req.body.password,
+    user_type: req.body.user_type,
+    age: req.body.age,
+    description: req.body.description
   }
 
   User.create(user)

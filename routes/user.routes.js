@@ -1,9 +1,12 @@
 module.exports = app => {
   const users = require('../controllers/user.controller')
+  const stories = require('../controllers/story.controller')
 
   let router = require('express').Router()
 
-  router.post('/', users.create)
+  app.use('/api', router)
 
-  app.use('/api/users', router)
+  router.post('/user', users.create)
+  router.post('/story', stories.create)
+
 }
