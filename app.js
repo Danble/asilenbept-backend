@@ -11,6 +11,7 @@ app.use(cors())
 
 const PORT = process.env.PORT || 8080
 require('./controller/user.controller')(app)
+require('./controller/story.controller')(app)
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`)
 })
