@@ -1,5 +1,6 @@
 const db = require('../models')
 const User = db.users
+const Story = db.stories
 const Op = db.Sequelize.Op
 
 exports.create = (req, res) => {
@@ -41,7 +42,8 @@ exports.findOne = (req, res) => {
   User.findOne({
     where: {
       nickname: user.nickname
-    }
+    },
+    include: Story
   })
   .then(data => {
     res.send(data)

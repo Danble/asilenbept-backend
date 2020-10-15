@@ -27,11 +27,11 @@ exports.createStory = (req, res) => {
   })
 }
 
+//TODO It might be useful but we aren't using this right now.
 exports.findAllStories = (req, res) => {
-  console.log(req)
-  Story.findAll()
+  console.log(`aquí va la query ${req.query.id}`)
+  Story.findAll({ where: { id: 1 } })
   .then(data => {
-    console.log('buscar historias sirve')
     res.send(data)
   })
   .catch(err => {
